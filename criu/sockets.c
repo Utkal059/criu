@@ -763,6 +763,10 @@ int dump_socket(struct fd_parms *p, int lfd, FdinfoEntry *e)
 	case AF_NETLINK:
 		ops = &netlink_dump_ops;
 		break;
+	case AF_ALG:
+		pr_warn("AF_ALG (crypto) socket detected. "
+			"Checkpoint of crypto sockets is not yet supported.\n");
+		return -ENOTSUP;
 	default:
 		pr_err("BUG! Unknown socket collected (family %d)\n", family);
 		return -1;
